@@ -60,7 +60,8 @@ namespace ABXY.Watchables.Editor
         /// <param name="label"></param>
         protected virtual void DrawWatchableProperty(Rect position, SerializedProperty property, GUIContent label)
         {
-            Rect textPosition = new Rect(position.x, position.y, position.width - 20, EditorGUIUtility.singleLineHeight);
+            Rect textPosition = new Rect(position.x, position.y, position.width - 20, position.height);
+            SerializedProperty prop = property.FindPropertyRelative("_value");
             EditorGUI.PropertyField(textPosition, property.FindPropertyRelative("_value"), label);
         }
 

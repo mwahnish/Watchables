@@ -21,5 +21,17 @@ namespace ABXY.Watchables.Editor
             watchable.onAssignment?.Invoke(property.FindPropertyRelative("_value").quaternionValue);
             watchable.onModification?.Invoke(property.FindPropertyRelative("_value").quaternionValue);
         }
+
+        protected override void DrawWatchableProperty(Rect position, SerializedProperty property, GUIContent label)
+        {
+            Quaternion rotation = property.FindPropertyRelative("_value").quaternionValue;
+            Vector3 newValue = EditorGUI.Vector3Field(position, label, rotation.eulerAngles);
+            property.FindPropertyRelative("_value").quaternionValue = Quaternion.Euler(newValue);
+        }
+
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+        {
+            return (EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing) * 2f;
+        }
     }
 }
